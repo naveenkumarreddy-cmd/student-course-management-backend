@@ -1,7 +1,7 @@
 package com.course.config;
 
 import jakarta.annotation.PostConstruct;
-
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +14,15 @@ public class AdminSeeder {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+
+    @Value("${default.admin.name}")
+    private String adminName;
+
+    @Value("${default.admin.email}")
+    private String adminEmail;
+
+    @Value("${default.admin.password}")
+    private String adminPassword;
 
     public AdminSeeder(UserRepository userRepository,
                        PasswordEncoder passwordEncoder) {
@@ -29,15 +38,12 @@ public class AdminSeeder {
         if (!adminExists) {
 
             User admin = new User();
-            admin.setName("Super Admin");
-            admin.setEmail("");
-            admin.setPassword(passwordEncoder.encode(""));
+            admin.setName(adminName);
+            admin.setEmail(adminEmail);
+            admin.setPassword(passwordEncoder.encode(adminPassword));
             admin.setRole(Role.ADMIN);
 
             userRepository.save(admin);
-
-            
         }
     }
 }
-
