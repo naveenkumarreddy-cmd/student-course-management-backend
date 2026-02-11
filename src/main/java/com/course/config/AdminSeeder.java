@@ -30,13 +30,14 @@ public class AdminSeeder {
 
             User admin = new User();
             admin.setName("Super Admin");
-            admin.setEmail("admin@course.com");
-            admin.setPassword(passwordEncoder.encode("admin123"));
+            admin.setEmail("");
+            admin.setPassword(passwordEncoder.encode(""));
             admin.setRole(Role.ADMIN);
 
             userRepository.save(admin);
 
-            System.out.println("✅ Default ADMIN created: ******@******.com / ******");
+            
         }
     }
 }
+
